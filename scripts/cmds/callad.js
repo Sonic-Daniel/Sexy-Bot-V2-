@@ -12,7 +12,7 @@ module.exports = {
 			vi: "gửi báo cáo, góp ý, báo lỗi,... của bạn về admin bot",
 			en: "send report, feedback, bug,... to admin bot"
 		},
-		category: "contacts admin",
+		category: "system",
 		guide: {
 			vi: "   {pn} <tin nhắn>",
 			en: "   {pn} <message>"
@@ -34,17 +34,17 @@ module.exports = {
 			noAdmin: "Hiện tại bot chưa có admin nào"
 		},
 		en: {
-			missingMessage: "Please enter the message you want to send to admin",
-			sendByGroup: "\n- Sent from group: %1\n- Thread ID: %2",
-			sendByUser: "\n- Sent from user",
-			content: "\n\nContent:\n─────────────────\n%1\n─────────────────\nReply this message to send message to user",
-			success: "Sent your message to %1 admin successfully!\n%2",
-			failed: "An error occurred while sending your message to %1 admin\n%2\nCheck console for more details",
-			reply: "📍 Reply from admin %1:\n─────────────────\n%2\n─────────────────\nReply this message to continue send message to admin",
-			replySuccess: "Sent your reply to admin successfully!",
-			feedback: "📝 Feedback from user %1:\n- User ID: %2%3\n\nContent:\n─────────────────\n%4\n─────────────────\nReply this message to send message to user",
-			replyUserSuccess: "Sent your reply to user successfully!",
-			noAdmin: "Bot has no admin at the moment"
+			missingMessage: "🌶| 𝐄𝐜𝐫𝐢𝐯𝐞𝐳 𝐮𝐧 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 𝐪𝐮𝐞 𝐯𝐨𝐮𝐬 𝐬𝐨𝐮𝐡𝐚𝐢𝐭𝐞𝐳 𝐞𝐧𝐯𝐨𝐲𝐞𝐫 𝐚 𝐥'𝐚𝐝𝐦𝐢𝐧 !",
+			sendByGroup: "\n- 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐞𝐧𝐯𝐨𝐲𝐞 𝐝𝐞𝐩𝐮𝐢𝐬 𝐥𝐞 𝐠𝐫𝐨𝐮𝐩𝐞 %1\n- 𝐓𝐈𝐃: %2",
+			sendByUser: "\n- 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐞𝐧𝐯𝐨𝐲𝐞 𝐩𝐚𝐫 𝐥'𝐮𝐭𝐢𝐥𝐢𝐬𝐚𝐭𝐞𝐮𝐫",
+			content: "\n\🎯| 𝐂𝐎𝐔𝐑𝐑𝐈𝐄𝐋:\n═════════════════\n%1\n═════════════════\n𝐕𝐞𝐮𝐢𝐥𝐥𝐞𝐳 𝐑𝐞𝐩𝐨𝐧𝐝𝐫𝐞 𝐚 𝐜𝐞 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 𝐩𝐨𝐮𝐫 𝐜𝐨𝐧𝐭𝐢𝐧𝐮𝐞𝐫 𝐥𝐚 𝐝𝐢𝐬𝐜𝐮𝐬𝐬𝐢𝐨𝐧 𝐚𝐯𝐞𝐜 𝐥'𝐮𝐭𝐢𝐥𝐢𝐬𝐚𝐭𝐞𝐮𝐫 !",
+			success: "✅| 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐞𝐧𝐯𝐨𝐲𝐞 𝐚 𝐦𝐨𝐧(𝐞𝐬) 『%1』 𝐚𝐝𝐦𝐢𝐧(𝐬) 𝐬𝐞𝐱𝐲 𝐚𝐯𝐞𝐜 𝐬𝐮𝐜𝐜𝐞𝐬\n━━━━━━━━━━━━━━━━\n%2",
+			failed: "━━━━━━━━━━━━━━━━\n❌| 𝐄𝐜𝐡𝐞𝐜 𝐝𝐞 𝐥'𝐞𝐧𝐯𝐨𝐢 𝐝𝐮 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 𝐚 𝐦𝐨𝐧(𝐞𝐬) le%1 𝐞𝐱(𝐬) \n━━━━━━━━━━━━━━━━\n%2\n",
+			reply: "𝐑𝐞𝐩𝐨𝐧𝐬𝐞 𝐝𝐞 𝐦𝐨𝐧 𝐚𝐝𝐦𝐢𝐧 𝐬𝐞𝐱𝐲 『%1』—シ:\n═════════════════\n『%2』—シ\n═════════════════\n𝐕𝐞𝐮𝐢𝐥𝐥𝐞𝐫 𝐫𝐞𝐩𝐨𝐧𝐝𝐫𝐞 𝐚 𝐜𝐞 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 𝐩𝐨𝐮𝐫 𝐜𝐨𝐧𝐭𝐢𝐧𝐮𝐞𝐫 𝐥𝐚 𝐝𝐢𝐬𝐜𝐮𝐬𝐬𝐢𝐨𝐧 𝐚𝐯𝐞𝐜 𝐥'𝐚𝐝𝐦𝐢𝐧『%1』—シ",
+			replySuccess: "𝗠𝗲𝘀𝘀𝗮𝗴𝗲 𝗲𝗻𝘃𝗼𝘆𝗲́!",
+			feedback: "✉ 𝗥𝗲́𝗽𝗼𝗻𝘀𝗲 𝗱𝙪 𝙡'𝙪𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙚𝙪𝙧 %1:\n- 𝘂𝗶𝗱 𝗱𝗲 𝙡'𝙪𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙚𝙪𝙧: %2%3\n\n𝗠𝗲𝘀𝘀𝗮𝗴𝗲:\n═════════════════\n%4\n═════════════════\n𝐑𝐞𝐩𝐨𝐧𝐝𝐬 𝐚 𝐜𝐞 𝐦𝐞𝐬𝐬𝐚𝐠𝐞 𝐩𝐨𝐮𝐫 𝐜𝐨𝐧𝐭𝐢𝐧𝐮𝐞𝐫 𝐥𝐚 𝐝𝐢𝐬𝐜𝐮𝐬𝐬𝐢𝐨𝐧 𝐚𝐯𝐞𝐜 『%1』—シ,
+			replyUserSuccess: "✅| 𝐌𝐞𝐬𝐬𝐚𝐠𝐞 𝐞𝐧𝐯𝐨𝐲𝐞 𝐚𝐯𝐞𝐜 𝐬𝐮𝐜𝐜𝐞𝐬!",
+			noAdmin: "❌🚫🚫🚫🚫❌"
 		}
 	},
 
@@ -56,9 +56,9 @@ module.exports = {
 		if (config.adminBot.length == 0)
 			return message.reply(getLang("noAdmin"));
 		const senderName = await usersData.getName(senderID);
-		const msg = "==📨️ CALL ADMIN 📨️=="
-			+ `\n- User Name: ${senderName}`
-			+ `\n- User ID: ${senderID}`
+		const msg = "=📨༺𝐇𝐄𝐍𝐓𝐀𝐈ᬊ᭄𝐒𝐀𝐍༻📨="
+			+ `\n- 𝘼𝙪𝙩𝙚𝙪𝙧 𝙙𝙪 𝙢𝙚𝙨𝙨𝙖𝙜𝙚: 🥒${senderName}🥒`
+			+ `\n- 𝗨𝗜𝗗 𝗱𝗲 𝙡'𝙪𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙚𝙪𝙧: 🥀${senderID}🥀`
 			+ (isGroup ? getLang("sendByGroup", (await threadsData.get(threadID)).threadName, threadID) : getLang("sendByUser"));
 
 		const formMessage = {
