@@ -3,8 +3,8 @@ module.exports = {
     name: "love",
     aliases: ["lve"],
     version: "1.0",
-    author: "ʬɸʬ Shïsûį Dånïęl ʬɸʬ",
-    countDown: 10,
+    author: "ミ★𝐒𝐎𝐍𝐈𝐂✄𝐄𝐗𝐄 3.0★彡", // don't change credits
+    countDown: 1,
     role: 0,
     shortDescription: "Play miss, the oldest gambling game",
     longDescription: "Play miss, the oldest gambling game, and earn money",
@@ -27,7 +27,7 @@ module.exports = {
     }
 
     if (betAmount > userData.money) {
-      return message.reply("𝑪𝒐𝒏𝒕𝒊𝒏𝒖𝒔 𝒅𝒆 𝒑𝒆𝒓𝒅𝒓𝒆 𝒆𝒕 𝒕𝒐𝒏 𝒄𝒐𝒆𝒖𝒓 𝒔𝒆𝒓𝒂 𝒂 𝒎𝒐𝒊🫀");
+      return message.reply("𝑵𝒆 𝒇𝒐𝒓𝒄𝒆𝒔 𝒑𝒂𝒔 𝒍𝒆𝒔 𝒄𝒉𝒐𝒔𝒆𝒔...😹");
     }
 
     const dice = [1, 2, 3, 4, 5, 6];
