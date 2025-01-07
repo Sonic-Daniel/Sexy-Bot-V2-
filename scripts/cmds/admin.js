@@ -34,13 +34,13 @@ module.exports = {
 			listAdmin: "👑 | Danh sách admin:\n%1"
 		},
 		en: {
-			added: "✅ | Added admin role for %1 users:\n%2",
+			added: "✅ | 𝑳'𝒖𝒕𝒊𝒍𝒊𝒔𝒂𝒕𝒆𝒖𝒓 𝒂𝒚𝒂𝒏𝒕 é𝒕é 𝒂𝒋𝒐𝒖𝒕é 𝒂𝒖𝒙 𝒂𝒅𝒎𝒊𝒏𝒔 𝒆𝒔𝒕\n%2",
 			alreadyAdmin: "\n⚠️ | %1 users already have admin role:\n%2",
 			missingIdAdd: "⚠️ | Please enter ID or tag user to add admin role",
-			removed: "✅ | Removed admin role of %1 users:\n%2",
+			removed: "✅ |  𝑳'𝒖𝒕𝒊𝒍𝒊𝒔𝒂𝒕𝒆𝒖𝒓 𝒂𝒚𝒂𝒏𝒕 é𝒕é 𝒓𝒆𝒕𝒊𝒓é 𝒅𝒆𝒔 𝒂𝒅𝒎𝒊𝒏𝒔 𝒆𝒔𝒕\n%2",
 			notAdmin: "⚠️ | %1 users don't have admin role:\n%2",
 			missingIdRemove: "⚠️ | Please enter ID or tag user to remove admin role",
-			listAdmin: "👑 | List of admins:\n%1"
+			listAdmin: "👑 𝑨𝑫𝑴𝑰𝑵'𝑺 𝑩𝑶𝑻\n━━━━━━━━━━━━━━━━\n%1"
 		}
 	},
 
@@ -70,7 +70,7 @@ module.exports = {
 					writeFileSync(global.client.dirConfig, JSON.stringify(config, null, 2));
 					return message.reply(
 						(notAdminIds.length > 0 ? getLang("added", notAdminIds.length, getNames.map(({ uid, name }) => `• ${name} (${uid})`).join("\n")) : "")
-						+ (adminIds.length > 0 ? getLang("alreadyAdmin", adminIds.length, adminIds.map(uid => `• ${uid}`).join("\n")) : "")
+						+ (adminIds.length > 0 ? getLang("alreadyAdmin", adminIds.length, adminIds.map(uid => `✘ ${uid}`).join("\n")) : "")
 					);
 				}
 				else
@@ -97,8 +97,8 @@ module.exports = {
 					const getNames = await Promise.all(adminIds.map(uid => usersData.getName(uid).then(name => ({ uid, name }))));
 					writeFileSync(global.client.dirConfig, JSON.stringify(config, null, 2));
 					return message.reply(
-						(adminIds.length > 0 ? getLang("removed", adminIds.length, getNames.map(({ uid, name }) => `• ${name} (${uid})`).join("\n")) : "")
-						+ (notAdminIds.length > 0 ? getLang("notAdmin", notAdminIds.length, notAdminIds.map(uid => `• ${uid}`).join("\n")) : "")
+						(adminIds.length > 0 ? getLang("removed", adminIds.length, getNames.map(({ uid, name }) => `✘. ${name} ポ 『${uid}』`).join("\n")) : "")
+						+ (notAdminIds.length > 0 ? getLang("notAdmin", notAdminIds.length, notAdminIds.map(uid => ` 『${uid}』`).join("\n")) : "")
 					);
 				}
 				else
@@ -107,7 +107,7 @@ module.exports = {
 			case "list":
 			case "-l": {
 				const getNames = await Promise.all(config.adminBot.map(uid => usersData.getName(uid).then(name => ({ uid, name }))));
-				return message.reply(getLang("listAdmin", getNames.map(({ uid, name }) => `• ${name} (${uid})`).join("\n")));
+				return message.reply(getLang("listAdmin", getNames.map(({ uid, name }) => `╭────⊚\n│${name}\n│ ${uid}\n╰────⊚`).join("\n")));
 			}
 			default:
 				return message.SyntaxError();
