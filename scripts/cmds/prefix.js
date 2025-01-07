@@ -16,7 +16,7 @@ module.exports = {
  
   onChat: async function({ event, message, getLang, api }) {
    const link = [
-"https://i.ibb.co/ZhbH43w/image.gif",
+"https://i.ibb.co/HFMVP9z/image.gif",
 ]
   let img =
 link[Math.floor(Math.random()*link.length)]
