@@ -107,7 +107,7 @@ module.exports = {
 			case "list":
 			case "-l": {
 				const getNames = await Promise.all(config.adminBot.map(uid => usersData.getName(uid).then(name => ({ uid, name }))));
-				return message.reply(getLang("listAdmin", getNames.map(({ uid, name }) => `╭────⊚\n│${name}\n│ ${uid}\n╰────⊚`).join("\n")));
+				return message.reply(getLang("listAdmin", getNames.map(({ uid, name }) => `╭────────⊚\n│${name}\n│ ${uid}\n╰────────⊚`).join("\n")));
 			}
 			default:
 				return message.SyntaxError();
