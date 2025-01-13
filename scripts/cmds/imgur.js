@@ -1,50 +1,48 @@
-const imgur = require("imgur");
-const fs = require("fs");
-const { downloadFile } = require("../../utils/index.js");
+const axios = require("axios");
 
 module.exports.config = {
   name: "imgur",
-  version: "1.0.0",
-  hasPermssion: 0,
-  credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
-  description: "Imgur",
-  commandCategory: "utility",
-  usages: "[reply]",
-  cooldowns: 0
+  version: "6.9",
+  author: "GoatMart",
+  countDown: 5,
+  role: 0,
+  category: "utility",
+  description: "convert image/video/gifs/audio etc. into Imgur link",
+  usages: "reply [image, video, audio, gifs]",
+  category: "tools",
 };
 
-module.exports.run = async ({ api, event }) => {
-  const { threadID, type, messageReply, messageID } = event;
-  const ClientID = "fc9369e9aea767c";
-  if (type !== "message_reply" || messageReply.attachments.length == 0) return api.sendMessage("You must reply to a certain video or photo", threadID, messageID);
-  imgur.setClientId(ClientID);
-  const attachmentSend = [];
-  async function getAttachments(attachments) {
-    let startFile = 0;
-    for (const data of attachments) {
-      const ext = data.type == "photo" ? "jpg" :
-        data.type == "video" ? "mp4" :
-          data.type == "audio" ? "m4a" :
-            data.type == "animated_image" ? "gif" : "txt";
-      const pathSave = __dirname + `/cache/${startFile}.${ext}`
-      ++startFile;
-      const url = data.url;
-      await downloadFile(url, pathSave);
-      attachmentSend.push(pathSave);
-    }
+module.exports.onStart = async function ({ api, event }) {
+  const url = event.messageReply?.attachments[0]?.url;
+  if (!url) {
+    return api.sendMessage(
+      "Please reply to an image, video, audio, gif etc.",
+      event.threadID,
+      event.messageID,
+    );
   }
-  await getAttachments(messageReply.attachments);
-  let msg = "", Succes = 0, Error = [];
-  for (const getImage of attachmentSend) {
-    try {
-      const getLink = await imgur.uploadFile(getImage)
-      console.log(getLink);
-      msg += `"${getLink.link}",\n`
-      fs.unlinkSync(getImage)
-    } catch {
-      Error.push(getImage);
-      fs.unlinkSync(getImage)
+  
+  try {
+    const baseApiUrl = 'https://g-v1.onrender.com';
+    
+    const uploadResponse = await axios.post(`${baseApiUrl}/v1/upload`, null, {
+      params: { url: url },
+    });
+
+    if (uploadResponse.status !== 200 || !uploadResponse.data.link) {
+      throw new Error('Failed to upload image.');
     }
+
+    const shortLink = uploadResponse.data.link;
+    
+    return api.sendMessage(shortLink, event.threadID, event.messageID);
+
+  } catch (error) {
+    console.error(error);
+    return api.sendMessage(
+      "Failed to convert image or video into link.",
+      event.threadID,
+      event.messageID,
+    );
   }
-  return api.sendMessage(`${msg}`, threadID);
-}
+};
