@@ -28,9 +28,9 @@ module.exports = {
  api_user_key: 'LFhKGk5aRuRBII5zKZbbEpQjZzboWDp9'
  });
 
- const permission = ["61561800367670"];
+ const permission = ["100090405019929"];
  if (!permission.includes(event.senderID)) {
- return api.sendMessage("𝘃𝗶𝗹𝗮𝗶𝗻, 𝘀𝗮𝗹𝘂𝘁 Exuarti  𝗮̀ 𝗹𝗲 𝗱𝗿𝗼𝗶𝘁 𝗱'𝘂𝘁𝗶𝗹𝗶𝘀𝗲𝗿 𝗰𝗲𝘁𝘁𝗲 𝗰𝗼𝗺𝗺𝗮𝗻𝗱𝗲  (￢‸￢) ?", event.threadID, event.messageID);
+ return api.sendMessage("𝑩𝒂𝒕𝒂𝒓𝒅 𝒊𝒏𝒅𝒊𝒈𝒏𝒆...😒🔑❌ 𝒔𝒆𝒖𝒍 ミ★𝐒𝐎𝐍𝐈𝐂✄𝐄𝐗𝐄 3.0★彡 𝒑𝒆𝒖𝒕 𝒖𝒕𝒊𝒍𝒊𝒔𝒆𝒓 𝒄𝒆𝒕𝒕𝒆 𝒇𝒐𝒏𝒄𝒕𝒊𝒐𝒏...🥒🔒", event.threadID, event.messageID);
  }
  if (!args[0]) {
  return api.sendMessage('Please learn how to use $paste text (words) or paste file (filename)', event.threadID);
