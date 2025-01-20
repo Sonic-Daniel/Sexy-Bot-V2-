@@ -1,128 +1,219 @@
 const axios = require("axios");
-const fs = require("fs");
-const yts = require("yt-search");
-const path = require("path");
-const fsPromises = require("fs").promises;
 
-const cacheDir = path.join(__dirname, "/cache");
+const fs = require('fs-extra');
+
+const path = require('path');
+
+const { getStreamFromURL, shortenURL, randomString } = global.utils;
+
+
+
+const API_KEYS = [
+
+    'b38444b5b7mshc6ce6bcd5c9e446p154fa1jsn7bbcfb025b3b',
+
+];
+
+
+
+async function video(api, event, args, message) {
+
+    api.setMessageReaction("🕢", event.messageID, (err) => {}, true);
+
+    try {
+
+        let title = '';
+
+        let shortUrl = '';
+
+        let videoId = '';
+
+
+
+        const extractShortUrl = async () => {
+
+            const attachment = event.messageReply.attachments[0];
+
+            if (attachment.type === "video" || attachment.type === "audio") {
+
+                return attachment.url;
+
+            } else {
+
+                throw new Error("Invalid attachment type.");
+
+            }
+
+        };
+
+
+
+        const getRandomApiKey = () => {
+
+            const randomIndex = Math.floor(Math.random() * API_KEYS.length);
+
+            return API_KEYS[randomIndex];
+
+        };
+
+
+
+        if (event.messageReply && event.messageReply.attachments && event.messageReply.attachments.length > 0) {
+
+            shortUrl = await extractShortUrl();
+
+            const musicRecognitionResponse = await axios.get(`https://audio-recon-ahcw.onrender.com/kshitiz?url=${encodeURIComponent(shortUrl)}`);
+
+            title = musicRecognitionResponse.data.title;
+
+            const searchResponse = await axios.get(`https://youtube-kshitiz-gamma.vercel.app/yt?search=${encodeURIComponent(title)}`);
+
+            if (searchResponse.data.length > 0) {
+
+                videoId = searchResponse.data[0].videoId;
+
+            }
+
+
+
+            shortUrl = await shortenURL(shortUrl);
+
+        } else if (args.length === 0) {
+
+            message.reply("Please provide a video name or reply to a video or audio attachment.");
+
+            return;
+
+        } else {
+
+            title = args.join(" ");
+
+            const searchResponse = await axios.get(`https://youtube-kshitiz-gamma.vercel.app/yt?search=${encodeURIComponent(title)}`);
+
+            if (searchResponse.data.length > 0) {
+
+                videoId = searchResponse.data[0].videoId;
+
+            }
+
+
+
+            const videoUrlResponse = await axios.get(`https://mr-kshitizyt-hfhj.onrender.com/download?id=${encodeURIComponent(videoId)}&apikey=${getRandomApiKey()}`);
+
+            if (videoUrlResponse.data.length > 0) {
+
+                shortUrl = await shortenURL(videoUrlResponse.data[0]);
+
+            }
+
+        }
+
+
+
+        if (!videoId) {
+
+            message.reply("No video found for the given query.");
+
+            return;
+
+        }
+
+
+
+        const downloadResponse = await axios.get(`https://mr-kshitizyt-hfhj.onrender.com/download?id=${encodeURIComponent(videoId)}&apikey=${getRandomApiKey()}`);
+
+        const videoUrl = downloadResponse.data[0];
+
+
+
+        if (!videoUrl) {
+
+            message.reply("Failed to retrieve download link for the video.");
+
+            return;
+
+        }
+
+
+
+        const writer = fs.createWriteStream(path.join(__dirname, "cache", `${videoId}.mp3`));
+
+        const response = await axios({
+
+            url: videoUrl,
+
+            method: 'GET',
+
+            responseType: 'stream'
+
+        });
+
+
+
+        response.data.pipe(writer);
+
+
+
+        writer.on('finish', () => {
+
+            const videoStream = fs.createReadStream(path.join(__dirname, "cache", `${videoId}.mp3`));
+
+            message.reply({ body: `📹 Playing: ${title}`, attachment: videoStream });
+
+            api.setMessageReaction("✅", event.messageID, () => {}, true);
+
+        });
+
+
+
+        writer.on('error', (error) => {
+
+            console.error("Error:", error);
+
+            message.reply("Error downloading the video.");
+
+        });
+
+    } catch (error) {
+
+        console.error("Error:", error);
+
+        message.reply("An error occurred.");
+
+    }
+
+}
+
+
 
 module.exports = {
-  config: {
-    name: "sing",
-    version: "1.2",
-    author: "Aryan Chauhan",
-    countDown: 10,
-    role: 0,
-    description: {
-      en: "Search and download the top audio from YouTube",
-    },
-    category: "media",
-    guide: {
-      en: "{pn} <search term>: search YouTube and download the top audio result",
-    },
-  },
 
-  onStart: async ({ api, args, event }) => {
-    if (args.length < 1) {
-      return api.sendMessage("❌ Please use the format '{pn}sing <search term>'.", event.threadID, event.messageID);
+    config: {
+
+        name: "sing", 
+
+        version: "1.0",
+
+        author: "Vex_Kshitiz",
+
+        countDown: 10,
+
+        role: 0,
+
+        shortDescription: "play audio from youtube",
+
+        longDescription: "play audio from youtube support audio recognition.",
+
+        category: "media",
+
+        guide: "{p} audio videoname / reply to audio or video" 
+
+    },
+
+    onStart: function ({ api, event, args, message }) {
+
+        return video(api, event, args, message);
+
     }
 
-    const searchTerm = args.join(" ");
-    try {
-      if (!fs.existsSync(cacheDir)) {
-        await fsPromises.mkdir(cacheDir, { recursive: true });
-      }
-
-      const searchResults = await yts(searchTerm);
-      const topVideo = searchResults.videos[0];
-
-      if (!topVideo) {
-        return api.sendMessage(`⭕ No results found for: ${searchTerm}`, event.threadID, event.messageID);
-      }
-
-      api.setMessageReaction("⏳", event.messageID, () => {}, true);
-
-      const videoUrl = topVideo.url;
-      const downloadUrlEndpoint = `https://aryanchauhanapi.onrender.com/youtube/audio?url=${encodeURIComponent(videoUrl)}`;
-      const respo = await axios.get(downloadUrlEndpoint);
-      const downloadUrl = respo.data.result.link;
-
-      if (!downloadUrl) {
-        return api.sendMessage("❌ Could not retrieve an MP3 file. Please try again with a different search.", event.threadID, event.messageID);
-      }
-
-      const totalSize = await getTotalSize(downloadUrl);
-      const audioPath = path.join(cacheDir, `ytb_audio_${topVideo.videoId}.mp3`);
-      await downloadFileParallel(downloadUrl, audioPath, totalSize, 5);
-
-      api.setMessageReaction("✅", event.messageID, () => {}, true);
-      await api.sendMessage(
-        {
-          body: `Title: ${topVideo.title}\n• Channel: ${topVideo.author.name}`,
-          attachment: fs.createReadStream(audioPath),
-        },
-        event.threadID,
-        () => fs.unlinkSync(audioPath),
-        event.messageID
-      );
-    } catch (error) {
-      console.error(error);
-      api.setMessageReaction("❌", event.messageID, () => {}, true);
-      return api.sendMessage("❌ Failed to download.", event.threadID, event.messageID);
-    }
-  },
 };
-
-async function getTotalSize(url) {
-  try {
-    const response = await axios.head(url);
-    return parseInt(response.headers["content-length"], 10);
-  } catch (error) {
-    throw new Error("Unable to retrieve file size.");
-  }
-}
-
-async function downloadFileParallel(url, filePath, totalSize, numChunks) {
-  const chunkSize = Math.ceil(totalSize / numChunks);
-  const chunks = [];
-  const progress = Array(numChunks).fill(0);
-
-  async function downloadChunk(url, start, end, index) {
-    try {
-      const response = await axios.get(url, {
-        headers: { Range: `bytes=${start}-${end}` },
-        responseType: "arraybuffer",
-        timeout: 15000,
-      });
-
-      progress[index] = response.data.byteLength;
-      return response.data;
-    } catch (error) {
-      throw new Error(`Failed to download chunk ${index + 1}: ${error.message}`);
-    }
-  }
-
-  for (let i = 0; i < numChunks; i++) {
-    const start = i * chunkSize;
-    const end = Math.min(start + chunkSize - 1, totalSize - 1);
-    chunks.push(downloadChunk(url, start, end, i));
-  }
-
-  try {
-    const buffers = await Promise.all(chunks);
-
-    const fileStream = fs.createWriteStream(filePath);
-    for (const buffer of buffers) {
-      fileStream.write(Buffer.from(buffer));
-    }
-
-    await new Promise((resolve, reject) => {
-      fileStream.on("finish", resolve);
-      fileStream.on("error", reject);
-      fileStream.end();
-    });
-  } catch (error) {
-    console.error("Error downloading or writing the file:", error);
-    throw error;
-  }
-}
