@@ -25,9 +25,9 @@ link[Math.floor(Math.random()*link.length)]
       switch (word) {
         case "ai":
           const replies = [
-            "🚫| 𝐀𝐩𝐩𝐞𝐥𝐥𝐞𝐬 𝐦𝐨𝐢 𝐩𝐚𝐫 𝐒𝐞𝐱𝐲𝐛𝐨𝐭...𝐩𝐚𝐬 𝐚𝐢 ! 𝐋𝐚 𝐩𝐫𝐨𝐜𝐡𝐚𝐢𝐧𝐞 𝐟𝐨𝐢𝐬 𝐣'𝐭𝐞 𝐝𝐞𝐟𝐨𝐧𝐜𝐞 𝐥𝐞 𝐜*𝐥 🌪😑",
+            "🚫| 𝐀𝐩𝐩𝐞𝐥𝐥𝐞𝐬 𝐦𝐨𝐢 𝐩𝐚𝐫 𝐀𝐬𝐭𝐫𝐨𝐛𝐨𝐭...𝐩𝐚𝐬 𝐚𝐢 ! 𝐋𝐚 𝐩𝐫𝐨𝐜𝐡𝐚𝐢𝐧𝐞 𝐟𝐨𝐢𝐬 𝐣'𝐭𝐞 𝐣𝐞𝐭𝐭𝐞 𝐝𝐚𝐧𝐬 𝐥𝐞 𝐧é𝐚𝐧𝐭🌪😑",
           ];
-          api.setMessageReaction("🖕", event.messageID, event.messageID, api); 
+          api.setMessageReaction("🙄", event.messageID, event.messageID, api); 
           const randomIndex = Math.floor(Math.random() * replies.length);
           message.reply({
             body: replies[randomIndex],
