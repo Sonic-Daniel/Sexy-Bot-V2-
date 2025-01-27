@@ -28,7 +28,7 @@ async function handleCommand(api, event, args, message) {
 
 
 
-        api.sendMessage(`༺『 𝐇𝐄𝐍𝐓𝐀𝐈ᬊ᭄𝐒𝐀𝐍 』༻\n══════ •『🧡』• ══════\n☘️✨${response}✨☘️\n══════ •『🧡』• ══════`, event.threadID, messageID);
+        api.sendMessage(`➣ ✘.𝙰𝚁𝙼𝚂𝚃𝚁𝙾𝙽𝙶〈 な\n══════ •『🧡』• ══════\n☘️✨${response}✨☘️\n══════ •『🧡』• ══════`, event.threadID, messageID);
 
     } catch (error) {
 
@@ -162,7 +162,7 @@ module.exports = {
 
             lastResponseMessageID = messageID;
 
-            api.sendMessage(`༺『 𝐇𝐄𝐍𝐓𝐀𝐈ᬊ᭄𝐒𝐀𝐍 』༻\n══════ •『🖤』• ══════\n🌱${response}🌱\n══════ •『🖤』• ══════`, event.threadID, messageID);
+            api.sendMessage(`➣ ✘.𝙰𝚁𝙼𝚂𝚃𝚁𝙾𝙽𝙶〈 な\n══════ •『🖤』• ══════\n🌱${response}🌱\n══════ •『🖤』• ══════`, event.threadID, messageID);
 
         } catch (error) {
 
@@ -180,11 +180,11 @@ module.exports = {
 
 
 
-        // Check if the message is a reply to the bot's message or starts with "sexybot"
+        // Check if the message is a reply to the bot's message or starts with "amstrong"
 
         if ((event.messageReply && event.messageReply.senderID === api.getCurrentUserID()) || (messageContent.startsWith("shisui") && event.senderID !== api.getCurrentUserID())) {
 
-            const input = messageContent.replace(/^sex\ s*/, "").trim();
+            const input = messageContent.replace(/^ai\ s*/, "").trim();
 
             try {
 
@@ -192,13 +192,13 @@ module.exports = {
 
                 lastResponseMessageID = messageID;
 
-                api.sendMessage(`༺『 𝐇𝐄𝐍𝐓𝐀𝐈ᬊ᭄𝐒𝐀𝐍 』༻\n══════ •『🧡』• ══════\n 🍂${response}🍂\n══════ •『🖤』• ══════`, event.threadID, messageID);
+                api.sendMessage(`➣ ✘.𝙰𝚁𝙼𝚂𝚃𝚁𝙾𝙽𝙶〈 な\n══════ •『🧡』• ══════\n 🍂${response}🍂\n══════ •『🖤』• ══════`, event.threadID, messageID);
 
             } catch (error) {
 
                 console.error("Error in onChat:", error.message);
 
-                api.sendMessage("༺『 𝐇𝐄𝐍𝐓𝐀𝐈ᬊ᭄𝐒𝐀𝐍 』༻\n══════ •『💙』• ══════\n!!! 👾Moi qui pensait que t'étais intelligent👾 !!!", event.threadID);
+                api.sendMessage("➣ ✘.𝙰𝚁𝙼𝚂𝚃𝚁𝙾𝙽𝙶〈 な\n══════ •『💙』• ══════\n!!! 👾𝐓𝐮 𝐦𝐞𝐫𝐢𝐭𝐞𝐬 𝐝'ê𝐭𝐫𝐞 𝐣𝐞𝐭é 𝐝𝐚𝐧𝐬 𝐮𝐧 𝐭𝐫𝐨𝐮 𝐧𝐨𝐢𝐫👾 !!!", event.threadID);
 
             }
 
